@@ -30,7 +30,7 @@ $url = Route::current()->getName();
                         </div>
                         <form action="{{ $route }}" method="POST" enctype="multipart/form-data">
                             <div class="d-flex justify-content-center">
-                                <img src="{{ asset(('images/banners/'.$post->banner)??'assets/admin/img/news/img01.jpg') }}" style="max-height: 150px" id="preview-img" alt="" class="img-thumbnail">
+                                <img src="{{ asset(isset($post)?'images/banners/'.$post->banner:'assets/admin/img/news/img01.jpg') }}" style="max-height: 150px" id="preview-img" alt="" class="img-thumbnail">
                             </div>
                             @csrf
                             @method($method)
