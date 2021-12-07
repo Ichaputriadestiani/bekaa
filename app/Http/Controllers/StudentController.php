@@ -20,7 +20,7 @@ class StudentController extends Controller
             'route' => route('user.student.create'),
             'user' => User::where([
                 ['role', 'student'],
-                ['id', auth()->user()->id]
+                // ['id', auth()->user()->id]
             ])->paginate(10)
         ];
 
