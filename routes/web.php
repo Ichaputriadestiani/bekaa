@@ -18,8 +18,8 @@ Auth::routes();
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 Route::get('/about', [FrontendController::class, 'about'])->name('frontend.about');
 //Route::get('/blog', [FrontendController::class, 'blog'])->name('frontend.blog');
-Route::get('/blog', BlogController::class . '@index');
-Route::get('/blog/{slug}', BlogController::class . '@show');
+Route::get('/blog', [BlogController::class, 'index']);
+Route::get('/blog/{slug}', [BlogController::class, 'show']);
 
 Route::get('/gallery', function () {
     return view('frontend.gallery');

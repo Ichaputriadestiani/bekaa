@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Post;
 
@@ -12,12 +13,16 @@ class BlogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $data = [
             'title' => 'Blog List',
-            'post' => Post::orderBy('created_at','desc')->paginate(5),
+            'posts' => Post::orderBy('created_at','desc')->paginate(5),
+            'categories' => Category::all()
         ];
+        if($request->has('q')){
+            $data['posts'] = Post::where('title', 'like', '%'.$request->q.'%')->orderBy('created_at','desc')->paginate(5);
+        }
         //dd($data);
         return view('frontend.blog',$data);
     }
@@ -53,7 +58,7 @@ class BlogController extends Controller
     {
         $data = [
             'title' => 'Post Detail',
-            'post' => Post::where('slug',$slug)->first()
+            'post' => Post::where('slug',$slug)->firstOrFail()
         ];
         //dd($data);
         return view('frontend.post',$data);
