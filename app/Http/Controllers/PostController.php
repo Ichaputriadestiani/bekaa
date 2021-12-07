@@ -50,7 +50,12 @@ class PostController extends Controller
         $post = new Post;
         $user_id = auth()->user()->id;
 
+        $file = $request->file('banner');
+        $banner = 'banner-'.uniqid().'.'.$file->getClientOriginalExtension();
+        $file->move('images/banners/', $banner);
+
         $post->user_id = $user_id;
+        $post->banner = $banner;
         $post->title = $request->title;
         $post->slug = $request->slug;
         $post->category_id = $request->category;
@@ -106,6 +111,16 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         $user_id = auth()->user()->id;
+
+        if($request->hasFile('banner')){
+            $file = $request->file('banner');
+            if(file_exists(public_path('images/banners/'.$post->banner))){
+                unlink(public_path('images/banners/'.$post->banner));
+            }
+            $banner = 'banner'.uniqid().'.'.$file->getClientOriginalExtension();
+            $file->move('images/banners/', $banner);
+            $post->banner = $banner;
+        }
 
         //$post->user_id = $user_id;
         $post->title = $request->title;

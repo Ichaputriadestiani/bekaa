@@ -20,7 +20,6 @@ Route::get('/about', [FrontendController::class, 'about'])->name('frontend.about
 //Route::get('/blog', [FrontendController::class, 'blog'])->name('frontend.blog');
 Route::get('/blog', BlogController::class . '@index');
 Route::get('/blog/{slug}', BlogController::class . '@show');
-Route::resource('post', PostController::class);
 
 Route::get('/gallery', function () {
     return view('frontend.gallery');
@@ -63,7 +62,7 @@ Route::group(['middleware' => ['auth', 'mentor']], function () {
         Route::delete('/delete/{id}', [ConsultSessionController::class, 'destroy'])->name('consult-session.destroy');
     });
 
-    //Route::resource('post', PostController::class);
+    Route::resource('post', PostController::class);
     Route::resource('category', CategoryController::class);
     Route::resource('todo', TodoController::class);
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');

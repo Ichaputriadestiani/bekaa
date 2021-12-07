@@ -28,10 +28,19 @@ $url = Route::current()->getName();
                         <div class="card-header">
                             <h4>Write Your Post</h4>
                         </div>
-                        <form action="{{ $route }}" method="POST">
+                        <form action="{{ $route }}" method="POST" enctype="multipart/form-data">
+                            <div class="d-flex justify-content-center">
+                                <img src="{{ asset(('images/banners/'.$post->banner)??'assets/admin/img/news/img01.jpg') }}" style="max-height: 150px" id="preview-img" alt="" class="img-thumbnail">
+                            </div>
                             @csrf
                             @method($method)
                             <div class="card-body">
+                                <div class="form-group row mb-4">
+                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Banner</label>
+                                    <div class="col-sm-12 col-md-7">
+                                        <input type="file" name="banner" id="banner" class="form-control">
+                                    </div>
+                                </div>
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Title</label>
                                     <div class="col-sm-12 col-md-7">
@@ -82,4 +91,15 @@ $url = Route::current()->getName();
 </div>
 </section>
 </div>
+@endsection
+
+@section('script')
+    <script>
+        $('#banner').on('change', function(){
+            const [file] = $(this)[0].files;
+            if(file){
+                $('#preview-img').attr('src', URL.createObjectURL(file))
+            }
+        })
+    </script>
 @endsection

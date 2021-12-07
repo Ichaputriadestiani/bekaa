@@ -13,11 +13,11 @@
             <ul class="sidebar-menu">
                 <li class="{{ request()->routeIs('todo.*')?'active':'' }}"><a class="nav-link active" href="/todo"><i class="fas fa-calendar"></i> <span>To Do</span></a></li>
                 <li>
-                    <li class="dropdown {{ request()->is(['post','category'])?'active':'' }}">
+                    <li class="dropdown {{ request()->routeIs(['post.*','category.*'])?'active':'' }}">
                         <a href="#" class="nav-link has-dropdown"><i class="fas fa-edit"></i> <span>Article</span></a>
                         <ul class="dropdown-menu" style="display: none;">
-                            <li class="{{ request()->is('post')?'active':'' }}"><a class="nav-link" href="/post">Post</a></li>
-                            <li class="{{ request()->is('category')?'active':'' }}"><a class="nav-link" href="/category">Category</a></li>
+                            <li class="{{ request()->routeIs('post.*')?'active':'' }}"><a class="nav-link" href="/post">Post</a></li>
+                            <li class="{{ request()->routeIs('category.*')?'active':'' }}"><a class="nav-link" href="/category">Category</a></li>
                         </ul>
                     </li>
                 </li>
