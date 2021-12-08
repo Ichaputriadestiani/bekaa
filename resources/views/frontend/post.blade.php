@@ -34,10 +34,10 @@
                 {{-- <a href="#">StreetStyle</a>, <a href="#">Fashion</a>, <a href="#">Couple</a> --}}
                 <a href="/{{ $post->category->category_slug }}">{{ $post->category->category_name }}</a>
               </div>
-              {{-- <span class="divider">|</span>
+              <span class="divider">|</span>
               <div class="post-comment-count">
-                <a href="#">8 Comments</a>
-              </div> --}}
+                <a href="#">{{ $post->comments->count() }} Comments</a>
+              </div>
             </div>
             <h2 class="post-title h1">{{ $post->title }}</h2>
             <div class="post-content">{!! $post->body !!}</div>
