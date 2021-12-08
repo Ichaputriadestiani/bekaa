@@ -21,13 +21,13 @@
           <div class="row">
             @foreach(App\Models\Gallery::all() as $gallery)
             <div class="col-md-6 col-lg-4 py-3 wow zoomIn">
-              <div class="card-doctor">
-              <div class="header">
-                  <a class="image-popup" href="{{ asset('assets/gallery/'.$gallery->picture) }}">
-                    <img src="{{ asset('assets/gallery/'.$gallery->picture) }}" alt="">
+              <div class="card">
+                <div class="card-header p-0">
+                  <a class="popup-image" href="{{ asset('assets/gallery/'.$gallery->picture) }}">
+                    <img src="{{ asset('assets/gallery/'.$gallery->picture) }}" alt="" class="w-100">
                   </a>
                 </div>
-                <div class="body">
+                <div class="card-body">
                   <span class="text-sm text-grey">{{ $gallery->title }}</span>
                 </div>
               </div>

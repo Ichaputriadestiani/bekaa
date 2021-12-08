@@ -23,7 +23,7 @@ class BlogController extends Controller
         if($request->has('q')){
             $data['posts'] = Post::where('title', 'like', '%'.$request->q.'%')->orderBy('created_at','desc')->paginate(5);
         }
-        //dd($data);
+
         return view('frontend.blog',$data);
     }
 
