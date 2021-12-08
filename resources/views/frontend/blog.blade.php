@@ -52,6 +52,7 @@
                         </div>
                         @endif
                     </div> <!-- .row -->
+                    {!! $posts->links('pagination::bootstrap-4') !!}
                 </div>
                 <div class="col-lg-4">
                   <div class="sidebar">
@@ -71,11 +72,6 @@
                   </div>
                 </div>
             </div> <!-- .row -->
-        </div>
-        <div class="card">
-            <div class="card-body">
-                {!! $posts->links('pagination::bootstrap-4') !!}
-            </div>
         </div>
     </div>
 </div>

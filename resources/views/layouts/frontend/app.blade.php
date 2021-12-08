@@ -9,7 +9,7 @@
     <meta name="msapplication-TileImage" content="ico/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
     <link rel="icon" type="image/png" sizes="16x16" href="ico/favicon-16x16.png">
-    <link rel="manifest" href="ico/manifest.json">
+    {{-- <link rel="manifest" href="ico/manifest.json"> --}}
 
     <title class="card-title">Website SahabatBK</title>
     <link rel="stylesheet" href="../assets/beka/css/maicons.css">
@@ -19,9 +19,9 @@
     <link rel="stylesheet" href="../assets/beka/css/theme.css">
 
     <!-- Magnific Popup core CSS file -->
-    <link rel="stylesheet" href="../assets/magnific-popup/magnific.popup.css">
+    <link rel="stylesheet" href="../assets/magnific-popup/magnific-popup.css">
 
-    {{-- <link rel="stylesheet" type="text/css" media="all" href="../assets/beka/gallery/consolidated.css" /> --}}
+    {{-- <link rel="stylesheet" type="text/css" media="all" href="../assets/beka/gallery/style2.css" /> --}}
 
     <style>
         .bk {
@@ -66,19 +66,17 @@
     <script src="../assets/beka/vendor/wow/wow.min.js"></script>
     <script src="../assets/beka/js/theme.js"></script>
 
-    <script src="../assets/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="../assets/magnific-popup/jquery.magnific-popup.min.js?v=1"></script>
 
     <script>
         $(document).ready(function() {
-
-            $('.image.popup').magnificPopup({
+            $('.popup-image').magnificPopup({
                 type: 'image',
                 closeOnContentClick: true,
                 mainClass: 'mfp-img-mobile',
                 image: {
                     verticalFit: true
                 }
-
             });
         });
     </script>
