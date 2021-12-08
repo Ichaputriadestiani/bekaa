@@ -10,7 +10,7 @@
         <div class="meta">
           <a href="#"><span class="mai-calendar"></span> {{ $post->created_at->format('M d, Y') }}</a>
           <a href="#"><span class="mai-person"></span> {{ $post->user->name }}</a>
-          {{-- <a href="#"><span class="mai-chatbubbles"></span> 19</a> --}}
+          <a href="#"><span class="mai-chatbubbles"></span> {{ $post->comments->count() }}</a>
         </div>
       </div>
     </div>

@@ -9,20 +9,20 @@
 
             <div class="collapse navbar-collapse" id="navbarSupport">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
+                    <li class="nav-item {{ request()->is('/')?'active':'' }}">
                         <a class="nav-link" href="/">Beranda</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item {{ request()->is('about')?'active':'' }}">
                         <a class="nav-link" href="/about">Tentang Kami</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item {{ request()->is('consult')?'active':'' }}">
                         <a class="nav-link" href="/consult">Konsultasi</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item {{ request()->is('blog')?'active':'' }}">
                         <a class="nav-link" href="/blog">Artikel</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/foto">Gallery</a>
+                    <li class="nav-item {{ request()->is('gallery')?'active':'' }}">
+                        <a class="nav-link" href="/gallery">Gallery</a>
                     </li>
                     <li class="nav-item">
                         @auth

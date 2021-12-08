@@ -21,7 +21,7 @@
                 <div class="col-lg-8">
                     <div class="row">
                         @foreach ($posts as $post)
-                        <div class="col-sm-6 py-3">
+                        <div class="col-sm-4 py-3">
                             <div class="card-blog">
                               <div class="header">
                                 <div class="post-category">
