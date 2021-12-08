@@ -1,10 +1,10 @@
 <div class="main-sidebar">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="/dashboard">FATHFORCE</a>
+            <a href="/dashboard">Sahabatbk</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="index.html">FFSK</a>
+            <a href="index.html">SBK</a>
         </div>
         <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
             <a href="/dashboard" class="btn btn-primary btn-lg btn-block btn-icon-split">
@@ -26,7 +26,7 @@
                 <li class="dropdown {{ request()->is(['admin/user/mentor','admin/user/student'])?'active':'' }}">
                     <a href="#" class="nav-link has-dropdown"><i class="fas fa-user"></i> <span>User</span></a>
                     <ul class="dropdown-menu" style="display: none;">
-                        <li class="{{ request()->is('admin/user/mentor')?'active':'' }}"><a class="nav-link" href="/admin/user/mentor">Guru</a></li>
+                        <li class="{{ request()->is('admin/user/mentor')?'active':'' }}"><a class="nav-link" href="/admin/user/mentor">Mentor</a></li>
                         <li class="{{ request()->is('admin/user/student')?'active':'' }}"><a class="nav-link" href="/admin/user/student">Siswa</a></li>
                     </ul>
                 </li>
@@ -36,6 +36,7 @@
                     <a href="#" class="nav-link has-dropdown"><i class="fas fa-comment-dots"></i> <span>Konsultasi</span></a>
                     <ul class="dropdown-menu" style="display: none;">
                         <li class="{{ request()->is('admin/consult-session')?'active':'' }}"><a class="nav-link" href="/admin/consult-session">Kelola Jadwal</a></li>
+                        <li class="{{ request()->is('admin/consult-session')?'active':'' }}"><a class="nav-link" href="/admin/consult-session">Riwayat Konsultasi</a></li>
                     </ul>
                 </li>
                 </li>

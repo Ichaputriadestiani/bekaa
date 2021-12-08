@@ -66,4 +66,5 @@ Route::group(['middleware' => ['auth', 'mentor']], function () {
     Route::resource('category', CategoryController::class);
     Route::resource('todo', TodoController::class);
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+    Route::resource('gallery', 'GalleryController');
 });

@@ -19,8 +19,8 @@ class MentorController extends Controller
             'method' => 'GET',
             'route' => route('user.mentor.create'),
             'user' => User::where([
-                ['role', 'mentor'],
-                ['id', auth()->user()->id]
+                ['role', 'mentor']
+                //['id', auth()->user()->id]
             ])->paginate(10)
         ];
 
