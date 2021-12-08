@@ -9,6 +9,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\TodoController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ConsultSessionController;
 use Illuminate\Support\Facades\Auth;
 
@@ -66,5 +67,5 @@ Route::group(['middleware' => ['auth', 'mentor']], function () {
     Route::resource('category', CategoryController::class);
     Route::resource('todo', TodoController::class);
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
-    Route::resource('gallery', 'GalleryController');
+    Route::resource('gallery', GalleryController::class);
 });

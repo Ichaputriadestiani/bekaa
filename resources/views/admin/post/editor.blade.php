@@ -73,7 +73,7 @@ $url = Route::current()->getName();
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Body</label>
                                     <div class="col-sm-12 col-md-7">
-                                        <textarea class="summernote-simple" name="body">{{ str_contains($url, 'edit') ? $post->body : '' }}</textarea></div>
+                                        <textarea class="summernote" name="body">{{ str_contains($url, 'edit') ? $post->body : '' }}</textarea></div>
                                 </div>
                             </div>
                             <div class="form-group row mb-4">
@@ -102,4 +102,5 @@ $url = Route::current()->getName();
             }
         })
     </script>
+
 @endsection

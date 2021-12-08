@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
+use App\Models\Category;
+use App\Models\Gallery;
 
 class GalleryController extends Controller
 {
@@ -13,7 +16,12 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            'title' => 'List Galeri',
+            'post'  => Post::get(),
+            'route' => route('post.create'),
+        ];
+        return view('admin.galeri.index', $data);
     }
 
     /**
@@ -23,7 +31,13 @@ class GalleryController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'title' => 'New Galeri',
+            'method' => 'POST',
+            'categories' => category::All(),
+            'route' => route('post.store'),
+        ];
+        return view('admin.galeri.editor', $data);
     }
 
     /**
@@ -34,7 +48,20 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post = new Post;
+        $user_id = auth()->user()->id;
+
+        $file = $request->file('banner');
+        $banner = 'banner-'.uniqid().'.'.$file->getClientOriginalExtension();
+        $file->move('images/banners/', $banner);
+
+        $post->user_id = $user_id;
+        $post->banner = $banner;
+        $post->title = $request->title;
+        $post->slug = $request->slug;
+        $post->category_id = $request->category;
+        $post->save();
+        return redirect()->route('galeri.index');
     }
 
     /**
@@ -43,9 +70,14 @@ class GalleryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+            $data = [
+                'title' => 'Post Detail',
+                'post' => Post::where('slug',$slug)->first()
+            ];
+            //dd($data);
+            return view('frontend.post',$data);
     }
 
     /**
@@ -56,7 +88,15 @@ class GalleryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = [
+            'title' => 'Edit Galeri',
+            'method' => 'PUT',
+            'route' => route('galeri.update', $id),
+            'post' => Post::where('id', $id)->first(),
+            'categories' => Category::get(),
+        ];
+        return view('admin.galeri.editor', $data);
+        //dd($data);
     }
 
     /**
@@ -68,7 +108,26 @@ class GalleryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::find($id);
+        $user_id = auth()->user()->id;
+
+        if($request->hasFile('banner')){
+            $file = $request->file('banner');
+            if(file_exists(public_path('images/banners/'.$post->banner))){
+                unlink(public_path('images/banners/'.$post->banner));
+            }
+            $banner = 'banner'.uniqid().'.'.$file->getClientOriginalExtension();
+            $file->move('images/banners/', $banner);
+            $post->banner = $banner;
+        }
+
+        //$post->user_id = $user_id;
+        $post->title = $request->title;
+        $post->slug = $request->slug;
+        $post->category_id = $request->category;
+        $post->update();
+        return redirect()->route('galeri.index');
+        //dd($request, $id);
     }
 
     /**
@@ -79,6 +138,8 @@ class GalleryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $destroy = Post::where('id', $id);
+        $destroy->delete();
+        return redirect(route("galeri.index"));
     }
 }
