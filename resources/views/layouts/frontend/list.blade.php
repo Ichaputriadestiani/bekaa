@@ -2,7 +2,7 @@
     <div class="container">
       <h1 class="text-center wow fadeInUp">Artikel terbaru</h1>
       <div class="row mt-5">
-      @foreach ($post as $p)
+        @foreach ($post as $p)
         <div class="col-lg-4 py-2 wow zoomIn">
           <div class="card-blog">
             <div class="header">
