@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Gallery;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
@@ -16,12 +17,17 @@ class GalleryController extends Controller
      */
     public function index()
     {
+<<<<<<< HEAD
         $data = [
             'title' => 'List Galeri',
             'post'  => Post::get(),
             'route' => route('post.create'),
         ];
         return view('admin.galeri.index', $data);
+=======
+        $galleries = Gallery::all();
+        return view('admin.gallery.index', compact('galleries'));
+>>>>>>> 4f417b6bdcd6d484e788243a16d60e107f6f18da
     }
 
     /**
@@ -31,13 +37,10 @@ class GalleryController extends Controller
      */
     public function create()
     {
-        $data = [
-            'title' => 'New Galeri',
-            'method' => 'POST',
-            'categories' => category::All(),
-            'route' => route('post.store'),
-        ];
-        return view('admin.galeri.editor', $data);
+        $title = 'Add Picture';
+        $method = 'POST';
+        $route = route('gallery.store');
+        return view('admin.gallery.editor', compact('title', 'method', 'route'));
     }
 
     /**
@@ -48,20 +51,17 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
-        $post = new Post;
-        $user_id = auth()->user()->id;
-
-        $file = $request->file('banner');
-        $banner = 'banner-'.uniqid().'.'.$file->getClientOriginalExtension();
-        $file->move('images/banners/', $banner);
-
-        $post->user_id = $user_id;
-        $post->banner = $banner;
-        $post->title = $request->title;
-        $post->slug = $request->slug;
-        $post->category_id = $request->category;
-        $post->save();
-        return redirect()->route('galeri.index');
+        $validate = $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'picture' => 'required|image'
+        ]);
+        $picture = $request->file('picture');
+        $name = uniqid().'.'.$picture->getClientOriginalExtension();
+        $picture->move('assets/gallery/', $name);
+        $validate['picture'] = $name;
+        Gallery::create($validate);
+        return redirect()->route('gallery.index');
     }
 
     /**
@@ -70,14 +70,9 @@ class GalleryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show(Gallery $gallery)
     {
-            $data = [
-                'title' => 'Post Detail',
-                'post' => Post::where('slug',$slug)->first()
-            ];
-            //dd($data);
-            return view('frontend.post',$data);
+
     }
 
     /**
@@ -86,17 +81,12 @@ class GalleryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Gallery $gallery)
     {
-        $data = [
-            'title' => 'Edit Galeri',
-            'method' => 'PUT',
-            'route' => route('galeri.update', $id),
-            'post' => Post::where('id', $id)->first(),
-            'categories' => Category::get(),
-        ];
-        return view('admin.galeri.editor', $data);
-        //dd($data);
+        $title = 'Edit Picture';
+        $method = 'PUT';
+        $route = route('gallery.update', $gallery);
+        return view('admin.gallery.editor', compact('title', 'method', 'route', 'gallery'));
     }
 
     /**
@@ -106,28 +96,24 @@ class GalleryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Gallery $gallery)
     {
-        $post = Post::find($id);
-        $user_id = auth()->user()->id;
-
-        if($request->hasFile('banner')){
-            $file = $request->file('banner');
-            if(file_exists(public_path('images/banners/'.$post->banner))){
-                unlink(public_path('images/banners/'.$post->banner));
+        $validate = $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'picture' => 'sometimes|image'
+        ]);
+        if($request->hasFile('picture')){
+            if(file_exists(public_path('assets/gallery/'.$gallery->picture))){
+                unlink(public_path('assets/gallery/'.$gallery->picture));
             }
-            $banner = 'banner'.uniqid().'.'.$file->getClientOriginalExtension();
-            $file->move('images/banners/', $banner);
-            $post->banner = $banner;
+            $picture = $request->file('picture');
+            $name = uniqid().'.'.$picture->getClientOriginalExtension();
+            $picture->move('assets/gallery/', $name);
+            $validate['picture'] = $name;
         }
-
-        //$post->user_id = $user_id;
-        $post->title = $request->title;
-        $post->slug = $request->slug;
-        $post->category_id = $request->category;
-        $post->update();
-        return redirect()->route('galeri.index');
-        //dd($request, $id);
+        $gallery->update($validate);
+        return redirect()->route('gallery.index');
     }
 
     /**
@@ -136,10 +122,12 @@ class GalleryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Gallery $gallery)
     {
-        $destroy = Post::where('id', $id);
-        $destroy->delete();
-        return redirect(route("galeri.index"));
+        if(file_exists(public_path('assets/gallery/'.$gallery->picture))){
+            unlink(public_path('assets/gallery/'.$gallery->picture));
+        }
+        $gallery->delete();
+        return back();
     }
 }

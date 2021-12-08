@@ -9,7 +9,7 @@
               <div class="post-category">
                 <a href="#">{{ $p->category->category_name }}</a>
               </div>
-              <a href="blog-details.html" class="post-thumb">
+              <a href="/post/{{ $p['slug'] }}"" class="post-thumb">
                 <img src="{{ asset('images/banners/'.$p->banner) }}" alt="">
               </a>
             </div>
@@ -18,7 +18,7 @@
               <div class="site-info">
                 <div class="avatar mr-2">
                   <div class="avatar-img">
-                    <img src="../assets/beka/img/person/detik.png" alt="">
+                    <img src="{{ $p->user->photo }}" alt="">
                   </div>
                   <span>{{ $p->user->name }}</span>
                 </div>

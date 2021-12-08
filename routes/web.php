@@ -9,8 +9,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\TodoController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ConsultSessionController;
+use App\Http\Controllers\GalleryController;
 use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
@@ -22,9 +22,7 @@ Route::get('/about', [FrontendController::class, 'about'])->name('frontend.about
 Route::get('/blog', [BlogController::class, 'index']);
 Route::get('/blog/{slug}', [BlogController::class, 'show']);
 
-Route::get('/gallery', function () {
-    return view('frontend.gallery');
-});
+Route::view('/gallery', 'frontend.gallery');
 
 
 // also frontend, but for logeed in user and student role
@@ -67,5 +65,5 @@ Route::group(['middleware' => ['auth', 'mentor']], function () {
     Route::resource('category', CategoryController::class);
     Route::resource('todo', TodoController::class);
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
-    Route::resource('gallery', GalleryController::class);
+    Route::resource('admin/gallery', GalleryController::class);
 });

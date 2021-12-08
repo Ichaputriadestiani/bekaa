@@ -18,85 +18,24 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-10">
-
           <div class="row">
-
-
+            @foreach(App\Models\Gallery::all() as $gallery)
             <div class="col-md-6 col-lg-4 py-3 wow zoomIn">
               <div class="card-doctor">
               <div class="header">
-                  <a class="image-popup" href="../assets/gallery/2.jpg">
-                    <img src="../assets/gallery/2.jpg" alt="">
+                  <a class="image-popup" href="{{ asset('assets/gallery/'.$gallery->picture) }}">
+                    <img src="{{ asset('assets/gallery/'.$gallery->picture) }}" alt="">
                   </a>
-
                 </div>
                 <div class="body">
-                  <span class="text-sm text-grey">Gallery 1</span>
+                  <span class="text-sm text-grey">{{ $gallery->title }}</span>
                 </div>
               </div>
             </div>
-
-            <div class="col-md-6 col-lg-4 py-3 wow zoomIn">
-              <div class="card-doctor">
-              <div class="header">
-                  <img src="../assets/gallery/4.jpg" alt="" width="240px">
-                </div>
-                <div class="body">
-                  <span class="text-sm text-grey">Gallery 2</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4 py-3 wow zoomIn">
-              <div class="card-doctor">
-                <div class="header">
-                  <img src="../assets/gallery/6.jpg" alt="">
-                </div>
-                <div class="body">
-                  <span class="text-sm text-grey">Gallery 3</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4 py-3 wow zoomIn">
-              <div class="card-doctor">
-                <div class="header">
-                  <img src="../assets/gallery/8.jpg" alt="">
-                </div>
-                <div class="body">
-                  <span class="text-sm text-grey">Gallery 4</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4 py-3 wow zoomIn">
-              <div class="card-doctor">
-                <div class="header">
-                  <img src="../assets/gallery/10.jpg" alt="">
-                </div>
-                <div class="body">
-                  <span class="text-sm text-grey">gallery 5</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4 py-3 wow zoomIn">
-              <div class="card-doctor">
-                <div class="header">
-                  <img src="../assets/gallery/12.jpg" alt="">
-                </div>
-                <div class="body">
-                  <span class="text-sm text-grey">Gallery 6</span>
-                </div>
-              </div>
-            </div>
-z
+            @endforeach
           </div>
-
-
         </div>
       </div>
     </div> <!-- .container -->
-  </div> <!-- .page-section -->
-
+</div> <!-- .page-section -->
 @endsection

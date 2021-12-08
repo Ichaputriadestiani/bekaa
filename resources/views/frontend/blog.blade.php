@@ -70,7 +70,7 @@
                     <x-recent-post/>
                   </div>
                 </div>
-              </div> <!-- .row -->
+            </div> <!-- .row -->
         </div>
         <div class="card">
             <div class="card-body">

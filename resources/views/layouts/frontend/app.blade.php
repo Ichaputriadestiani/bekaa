@@ -21,7 +21,7 @@
     <!-- Magnific Popup core CSS file -->
     <link rel="stylesheet" href="../assets/magnific-popup/magnific.popup.css">
 
-    <link rel="stylesheet" type="text/css" media="all" href="assets/beka/gallery/style2.css" />
+    {{-- <link rel="stylesheet" type="text/css" media="all" href="../assets/beka/gallery/consolidated.css" /> --}}
 
     <style>
         .bk {
