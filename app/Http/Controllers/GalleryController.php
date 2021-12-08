@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Gallery;
 use Illuminate\Http\Request;
 
 class GalleryController extends Controller
@@ -13,7 +14,8 @@ class GalleryController extends Controller
      */
     public function index()
     {
-        //
+        $galleries = Gallery::all();
+        return view('admin.gallery.index', compact('galleries'));
     }
 
     /**
@@ -23,7 +25,10 @@ class GalleryController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Add Picture';
+        $method = 'POST';
+        $route = route('gallery.store');
+        return view('admin.gallery.editor', compact('title', 'method', 'route'));
     }
 
     /**
@@ -34,7 +39,17 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'picture' => 'required|image'
+        ]);
+        $picture = $request->file('picture');
+        $name = uniqid().'.'.$picture->getClientOriginalExtension();
+        $picture->move('assets/gallery/', $name);
+        $validate['picture'] = $name;
+        Gallery::create($validate);
+        return redirect()->route('gallery.index');
     }
 
     /**
@@ -43,9 +58,9 @@ class GalleryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Gallery $gallery)
     {
-        //
+
     }
 
     /**
@@ -54,9 +69,12 @@ class GalleryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Gallery $gallery)
     {
-        //
+        $title = 'Edit Picture';
+        $method = 'PUT';
+        $route = route('gallery.update', $gallery);
+        return view('admin.gallery.editor', compact('title', 'method', 'route', 'gallery'));
     }
 
     /**
@@ -66,9 +84,24 @@ class GalleryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Gallery $gallery)
     {
-        //
+        $validate = $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'picture' => 'sometimes|image'
+        ]);
+        if($request->hasFile('picture')){
+            if(file_exists(public_path('assets/gallery/'.$gallery->picture))){
+                unlink(public_path('assets/gallery/'.$gallery->picture));
+            }
+            $picture = $request->file('picture');
+            $name = uniqid().'.'.$picture->getClientOriginalExtension();
+            $picture->move('assets/gallery/', $name);
+            $validate['picture'] = $name;
+        }
+        $gallery->update($validate);
+        return redirect()->route('gallery.index');
     }
 
     /**
@@ -77,8 +110,12 @@ class GalleryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Gallery $gallery)
     {
-        //
+        if(file_exists(public_path('assets/gallery/'.$gallery->picture))){
+            unlink(public_path('assets/gallery/'.$gallery->picture));
+        }
+        $gallery->delete();
+        return back();
     }
 }

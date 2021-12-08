@@ -21,7 +21,7 @@
                         </ul>
                     </li>
                 </li>
-                <li><a class="nav-link" href="/gallery"><i class="fas fa-image"></i> <span>Gallery</span></a></li>
+                <li class="{{ request()->routeIs('gallery.*')?'active':'' }}"><a class="nav-link" href="/admin/gallery"><i class="fas fa-image"></i> <span>Gallery</span></a></li>
                 <li>
                 <li class="dropdown {{ request()->is(['admin/user/mentor','admin/user/student'])?'active':'' }}">
                     <a href="#" class="nav-link has-dropdown"><i class="fas fa-user"></i> <span>User</span></a>
