@@ -10,7 +10,7 @@
                 <a href="#">{{ $p->category->category_name }}</a>
               </div>
               <a href="blog-details.html" class="post-thumb">
-                <img src="../assets/beka/img/blog/bullying.png" alt="">
+                <img src="{{ asset('images/banners/'.$p->banner) }}" alt="">
               </a>
             </div>
             <div class="body">
