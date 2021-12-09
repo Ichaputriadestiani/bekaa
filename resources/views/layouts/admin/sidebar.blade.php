@@ -23,11 +23,11 @@
                 </li>
                 <li class="{{ request()->routeIs('gallery.*')?'active':'' }}"><a class="nav-link" href="/admin/gallery"><i class="fas fa-image"></i> <span>Gallery</span></a></li>
                 <li>
-                <li class="dropdown {{ request()->is(['admin/user/mentor','admin/user/student'])?'active':'' }}">
+                <li class="dropdown {{ request()->is(['admin/user/mentor*','admin/user/student*'])?'active':'' }}">
                     <a href="#" class="nav-link has-dropdown"><i class="fas fa-user"></i> <span>User</span></a>
                     <ul class="dropdown-menu" style="display: none;">
-                        <li class="{{ request()->is('admin/user/mentor')?'active':'' }}"><a class="nav-link" href="/admin/user/mentor">Mentor</a></li>
-                        <li class="{{ request()->is('admin/user/student')?'active':'' }}"><a class="nav-link" href="/admin/user/student">Siswa</a></li>
+                        <li class="{{ request()->is('admin/user/mentor*')?'active':'' }}"><a class="nav-link" href="/admin/user/mentor">Mentor</a></li>
+                        <li class="{{ request()->is('admin/user/student*')?'active':'' }}"><a class="nav-link" href="/admin/user/student">Siswa</a></li>
                     </ul>
                 </li>
                 </li>

@@ -20,7 +20,6 @@
                 You can manage all Gallery, such as editing, deleting and more.
             </p>
 
-
             <div class="row mt-4">
                 <div class="col-12">
                     <div class="card">
@@ -37,7 +36,7 @@
                                     <thead>
                                         <tr>
                                             <th>Title</th>
-                                            <th>Picture</th>
+                                            <th>Created At</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -47,16 +46,16 @@
                                                 <div class="table-links">
                                                     <a href="{{ route('gallery.edit',$gallery) }}">Edit</a>
                                                     <div class="bullet"></div>
-                                                    <a href="#" onclick="event.preventDefault(); $('#destroy-{{ $gallery->id }}').submit()">Delete</a>
-                                                    <form id="destroy-{{ $gallery->id }}" action="{{ route('gallery.destroy', $gallery) }}" method="POST">
+                                                    <a href="#" class="delete-data">Delete</a>
+                                                    <form class="d-inline" action="{{ route('gallery.destroy', $gallery) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                     </form>
+                                                    <div class="bullet"></div>
+                                                    <a href="{{ route('gallery.show', $gallery) }}">Show</a>
                                                 </div>
                                             </td>
-                                            <td>
-                                                <img src="{{ asset('assets/gallery/'.$gallery->picture) }}" style="max-height: 150px" alt="" class="img-thumbnail">
-                                            </td>
+                                            <td>{{ $gallery->created_at }}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>

@@ -19,7 +19,6 @@
                 You can manage all Student, such as editing, deleting and more.
             </p>
 
-
             <div class="row mt-4">
                 <div class="col-12">
                     <div class="card">
@@ -46,8 +45,8 @@
                                                 <div class="table-links">
                                                     <a href="{{ route('user.student.edit',$u->id) }}">Edit</a>
                                                     <div class="bullet"></div>
-                                                    <a href="#" onclick="event.preventDefault(); $('#destroy-{{ $u->id }}').submit()">Delete</a>
-                                                    <form id="destroy-{{ $u->id }}" action="{{ route('user.student.destroy',$u->id) }}" method="POST">
+                                                    <a href="#" class="delete-data">Delete</a>
+                                                    <form action="{{ route('user.student.destroy',$u->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                     </form>

@@ -49,14 +49,14 @@ class TodoController extends Controller
     public function store(Request $request)
     {
         $td = new Todo;
-            $user_id = auth()->user()->id;
-            $td->user_id = $user_id;
-            $td->todo = $request->todo;
-            $td->assigned_to = $request->assignto;
-            $td->start_date = $request->start;
-            $td->end_date = $request->end;
-            $td->save();
-            return redirect()->route('todo.index');
+        $user_id = auth()->user()->id;
+        $td->user_id = $user_id;
+        $td->todo = $request->todo;
+        $td->assigned_to = $request->assignto;
+        $td->start_date = $request->start;
+        $td->end_date = $request->end;
+        $td->save();
+        return redirect()->route('todo.index')->with('success', 'Todo created successfully');
     }
 
     /**
@@ -105,7 +105,7 @@ class TodoController extends Controller
         $td->start_date = $request->start;
         $td->end_date = $request->end;
         $td->update();
-        return redirect()->route('todo.index');
+        return redirect()->route('todo.index')->with('success', 'Todo updated successfully');
     }
 
     /**
@@ -118,6 +118,6 @@ class TodoController extends Controller
     {
         $destroy = Todo::where('id', $id);
         $destroy->delete();
-        return redirect(route("todo.index"));
+        return redirect(route("todo.index"))->with('success', 'Todo deleted successfully');
     }
 }

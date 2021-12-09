@@ -6,7 +6,6 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\MentorController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\BlogController;
 use App\Http\Controllers\TodoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ConsultSessionController;
@@ -18,11 +17,9 @@ Auth::routes();
 // Start Route for Frontend View
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 Route::get('/about', [FrontendController::class, 'about'])->name('frontend.about');
-//Route::get('/blog', [FrontendController::class, 'blog'])->name('frontend.blog');
-Route::get('/blog', [BlogController::class, 'index']);
-Route::get('/blog/{slug}', [BlogController::class, 'show']);
-
-Route::view('/gallery', 'frontend.gallery');
+Route::get('/blog', [FrontendController::class, 'blog']);
+Route::get('/blog/{post:slug}', [FrontendController::class, 'post']);
+Route::get('/gallery', [FrontendController::class, 'gallery']);
 
 
 // also frontend, but for logeed in user and student role

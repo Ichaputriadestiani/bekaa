@@ -16,12 +16,11 @@ class CategoryController extends Controller
     public function index()
     {
         $data= [
-        'title' => 'List Kategori',
-        'category'  => Category::get(),
-        'route' => route('category.create'),
-    ];
-    return view('admin.category.index', $data);
-
+            'title' => 'List Kategori',
+            'category'  => Category::get(),
+            'route' => route('category.create'),
+        ];
+        return view('admin.category.index', $data);
     }
 
     /**
@@ -54,7 +53,7 @@ class CategoryController extends Controller
         $category->category_name = $request->cat_name;
         $category->category_slug = $request->cat_slug;
         $category->save();
-        return redirect()->route('category.index');
+        return redirect()->route('category.index')->with('success', 'Category created successfully');
     }
 
     /**
@@ -95,12 +94,10 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $cat = Category::find($id);
-        //$user_id = auth()->user()->id;
         $cat->category_name = $request->cat_name;
         $cat->category_slug = $request->cat_slug;
         $cat->update();
-        return redirect()->route('category.index');
-        //dd($request, $id);
+        return redirect()->route('category.index')->with('success', 'Category edited successfully');
     }
 
     /**
@@ -113,6 +110,6 @@ class CategoryController extends Controller
     {
         $destroy =Category::where('id', $id);
         $destroy->delete();
-        return redirect(route("category.index"));
+        return redirect(route("category.index"))->with('success', 'Category deleted successfully');
     }
 }

@@ -47,8 +47,8 @@
                                 <td>{{ $cat->category_name }}<div class="table-links">
                               <a href="{{ route('category.edit',$cat->id) }}">Edit</a>
                               <div class="bullet"></div>
-                              <a href="#" onclick="event.preventDefault(); $('#destroy-{{ $cat->id }}').submit()">Delete</a>
-                              <form id="destroy-{{ $cat->id }}" action="{{ route('category.destroy',$cat->id) }}" method="POST">
+                              <a href="#" class="delete-data">Delete</a>
+                              <form action="{{ route('category.destroy',$cat->id) }}" method="POST">
                                   @csrf
                                   @method('DELETE')
                                 </form>

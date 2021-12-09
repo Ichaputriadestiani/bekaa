@@ -19,7 +19,7 @@
       <div class="row justify-content-center">
         <div class="col-lg-10">
           <div class="row">
-            @foreach(App\Models\Gallery::all() as $gallery)
+            @foreach($galleries as $gallery)
             <div class="col-md-6 col-lg-4 py-3 wow zoomIn">
               <div class="card">
                 <div class="card-header p-0">

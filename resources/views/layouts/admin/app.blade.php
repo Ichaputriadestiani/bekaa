@@ -19,6 +19,8 @@
   <!-- Datatables -->
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
 
+  <!-- Sweetalert2 -->
+  <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
 </head>
 
 <body>
@@ -55,7 +57,40 @@
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 
   <!-- Page Specific JS File -->
-
+  <!-- Sweetalert2 -->
+  <script src="{{ asset('js/sweetalert2.min.js') }}"></script>
+  <script>
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      $('.delete-data').on('click', function(e){
+        e.preventDefault()
+        Swal.fire({
+            icon: 'warning',
+            title: 'Apakah kamu yakin ingin menghapusnya?',
+            showCancelButton: true,
+            cancelButtonText: 'Batal',
+            confirmButtonText: 'Ya',
+            confirmButtonColor: '#ff0000',
+            cancelButtonColor: '#1010ff'
+        }).then((result)=>{
+            if(result.isConfirmed){
+                $(this).next().submit();
+            }
+        })
+      })
+  </script>
+  @if (session()->has('success'))
+      <script>Toast.fire({icon:'success',title:"{{ session('success') }}"})</script>
+  @endif
   @yield('script')
 </body>
 </html>

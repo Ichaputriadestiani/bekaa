@@ -7,7 +7,7 @@
             <div class="section-header-back">
                 <a href="{{ url()->previous() }}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
             </div>
-            <h1>Create New Student</h1>
+            <h1>Create New Photo</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
                 <div class="breadcrumb-item"><a href="#">{{ $title }}s</a></div>

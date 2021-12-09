@@ -6,7 +6,6 @@ use App\Models\Gallery;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
-use App\Models\Gallery;
 
 class GalleryController extends Controller
 {
@@ -17,17 +16,8 @@ class GalleryController extends Controller
      */
     public function index()
     {
-<<<<<<< HEAD
-        $data = [
-            'title' => 'List Galeri',
-            'post'  => Post::get(),
-            'route' => route('post.create'),
-        ];
-        return view('admin.galeri.index', $data);
-=======
         $galleries = Gallery::all();
         return view('admin.gallery.index', compact('galleries'));
->>>>>>> 4f417b6bdcd6d484e788243a16d60e107f6f18da
     }
 
     /**
@@ -61,7 +51,7 @@ class GalleryController extends Controller
         $picture->move('assets/gallery/', $name);
         $validate['picture'] = $name;
         Gallery::create($validate);
-        return redirect()->route('gallery.index');
+        return redirect()->route('gallery.index')->with('success', 'Gallery has been created');
     }
 
     /**
@@ -72,7 +62,7 @@ class GalleryController extends Controller
      */
     public function show(Gallery $gallery)
     {
-
+        return view('admin.gallery.show', compact('gallery'));
     }
 
     /**
@@ -113,7 +103,7 @@ class GalleryController extends Controller
             $validate['picture'] = $name;
         }
         $gallery->update($validate);
-        return redirect()->route('gallery.index');
+        return redirect()->route('gallery.index')->with('success', 'Photo updated successfully');
     }
 
     /**
@@ -128,6 +118,6 @@ class GalleryController extends Controller
             unlink(public_path('assets/gallery/'.$gallery->picture));
         }
         $gallery->delete();
-        return back();
+        return back()->with('success', 'Photo deleted successfully');
     }
 }

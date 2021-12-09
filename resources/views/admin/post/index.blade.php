@@ -45,15 +45,19 @@
                         <tbody>
                         @foreach ($post as $ps)
                             <tr>
-                                <td>{{ $ps->title }}<div class="table-links">
-                              <a href="{{ route('post.edit',$ps->id) }}">Edit</a>
-                              <div class="bullet"></div>
-                              <a href="#" onclick="event.preventDefault(); $('#destroy-{{ $ps->id }}').submit()">Delete</a>
-                              <form id="destroy-{{ $ps->id }}" action="{{ route('post.destroy',$ps->id) }}" method="POST">
-                                  @csrf
-                                  @method('DELETE')
-                                </form>
-                            </div></td>
+                                <td>{{ $ps->title }}
+                                    <div class="table-links">
+                                        <a href="{{ route('post.edit',$ps->id) }}">Edit</a>
+                                        <div class="bullet"></div>
+                                        <a href="#" class="delete-data">Delete</a>
+                                        <form class="d-inline" action="{{ route('post.destroy',$ps->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+                                        <div class="bullet"></div>
+                                        <a href="{{ route('post.show', $ps) }}">Show</a>
+                                    </div>
+                                </td>
                                 <td>{{ $ps->slug }}</td>
                                 <td>{{ $ps->category->category_name }}</td>
                                 <td>{{ $ps->created_at }}</td>
